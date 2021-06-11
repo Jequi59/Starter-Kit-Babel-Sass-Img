@@ -9,7 +9,8 @@ const config = {
   entry: "./app/app.js",
   output: {
     filename: "main.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
+    publicPath: '/'
   },
   plugins: [new HtmlWebpackPlugin({ template: "./app/index.html" })],
   mode: "development",
@@ -36,7 +37,7 @@ const config = {
         }
       },
       {
-        test: /\.(jpg|png)$/,
+        test: /\.(jpg|png|svg)$/,
         use: [
           {
             loader: 'file-loader',
@@ -49,7 +50,10 @@ const config = {
         ],
       }
     ]
-  }
+  },
+  devServer: {
+    historyApiFallback: true,
+  },
 }
 
 if (currentTask == "build") {
